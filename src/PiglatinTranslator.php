@@ -1,4 +1,4 @@
-<?php
+<?php namespace src\PiglatinTranslator;
 
 class PiglatinTranslator
 {
@@ -8,7 +8,7 @@ class PiglatinTranslator
     ];
 
     public function translate($word)
-    {   
+    {
 
         $translation = '';
         $words = [];
@@ -43,7 +43,8 @@ class PiglatinTranslator
             $suffix .= 'ay';
             $translation .= substr($word, $counter);
             $translation .= $suffix;
-        } else { // or if it starts with vowel(s)
+        } else {
+            // or if it starts with vowel(s)
             $suffix .= 'way';
             $translation .= $word . $suffix;
         }
