@@ -13,4 +13,4 @@ before_script:
 script:
  - vendor/bin/phpspec run
  - vendor/bin/phpmd src text codesize,unusedcode,naming
-
+ - vendor/bin/phpcs --standard=psr2 src
