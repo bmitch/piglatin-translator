@@ -1,6 +1,6 @@
 <?php
 
-namespace spec;
+namespace spec\Bmitch;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,30 +9,10 @@ class PiglatinTranslatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('PiglatinTranslator');
+        $this->shouldHaveType('Bmitch\PiglatinTranslator');
     }
 
-    function it_translates_the_word_pig()
-    {
-        $this->translate('pig')->shouldReturn('igpay');
-    }
-
-    function it_translates_the_word_banana()
-    {
-        $this->translate('banana')->shouldReturn('ananabay');
-    }
-
-    function it_translates_the_word_trash()
-    {
-        $this->translate('trash')->shouldReturn('ashtray');
-    }
-
-    function it_translates_the_word_happy()
-    {
-        $this->translate('happy')->shouldReturn('appyhay');
-    }
-
-    function it_translates_the_word_duck()
+	function it_translates_the_word_duck()
     {
         $this->translate('duck')->shouldReturn('uckday');
     }
