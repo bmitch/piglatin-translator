@@ -59,7 +59,7 @@ class PiglatinTranslator
     private function movePunctuationMarkToEndOfWord($translation)
     {
         $translation = str_replace('.', '', $translation);
-        $translation .= "."; 
+        $translation .= ".";
         return $translation;
     }
 
