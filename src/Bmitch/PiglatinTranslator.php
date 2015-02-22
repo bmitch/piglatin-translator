@@ -8,24 +8,22 @@ class PiglatinTranslator
         'b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'
     ];
 
-    public function translate($word)
+    protected static $punctuationMarks = [
+        '.'
+    ];
+
+    public function translate($phrase)
     {
 
         $translation = '';
-        $words = [];
+        $wordsArray  = [];
+        $wordsArray  = explode(' ', $phrase);
 
-        if (preg_match('/\s/', $word)) {
-            $words = explode(' ', $word);
-        } else {
-            $translation = $this->translateWord($word);
-        }
-
-        foreach ($words as $word) {
+        foreach ($wordsArray as $word) {
             $translation .= $this->translateWord($word) . ' ';
         }
 
         return trim($translation);
-
     }
 
     public function translateWord($word)
@@ -34,6 +32,11 @@ class PiglatinTranslator
         $suffix = '';
         $counter = 0;
         $wordArray = str_split($word);
+        $savedPunctuationMark = '';
+        // if it has a punctuation mark on the end
+        if (substr($word, -1) == static::$punctuationMarks) {
+            $savedPunctuationMark = '.';
+        }
 
         // if it starts with consonant sound
         if (in_array($wordArray[$counter], static::$consonants)) {
@@ -49,6 +52,8 @@ class PiglatinTranslator
             $suffix .= 'way';
             $translation .= $word . $suffix;
         }
+
+        $translation .= $savedPunctuationMark;
 
         return $translation;
     }
