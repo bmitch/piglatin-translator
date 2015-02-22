@@ -57,8 +57,8 @@ class PiglatinTranslatorSpec extends ObjectBehavior
         $this->translate('over the city in an airplane')->shouldReturn('overway ethay itycay inway anway airplaneway');
     }
 
-/*    function it_translates_a_phrase_with_a_period_on_the_end_and_last_word_vowel_sound()
+    function it_translates_a_phrase_with_a_period_on_the_end_and_last_word_vowel_sound()
     {
         $this->translate('over the city in an airplane.')->shouldReturn('overway ethay itycay inway anway airplaneway.');
-    }*/
+    }
 }

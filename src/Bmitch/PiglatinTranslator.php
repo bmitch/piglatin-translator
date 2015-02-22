@@ -5,7 +5,13 @@ namespace Bmitch;
 class PiglatinTranslator
 {
     protected static $consonants = [
-        'b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z'
+        'b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z',
+        'B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Z'
+    ];
+
+    protected static $vowels = [
+        'a','e','i','o','u','y',
+        'A','E','I','O','U','Y',
     ];
 
     protected static $punctuationMarks = [
@@ -14,15 +20,12 @@ class PiglatinTranslator
 
     public function translate($phrase)
     {
-
         $translation = '';
-        $wordsArray  = [];
         $wordsArray  = explode(' ', $phrase);
 
         foreach ($wordsArray as $word) {
             $translation .= $this->translateWord($word) . ' ';
         }
-
         return trim($translation);
     }
 
@@ -32,14 +35,11 @@ class PiglatinTranslator
         $suffix = '';
         $counter = 0;
         $wordArray = str_split($word);
-        $savedPunctuationMark = '';
-        // if it has a punctuation mark on the end
-        if (substr($word, -1) == static::$punctuationMarks) {
-            $savedPunctuationMark = '.';
-        }
 
-        // if it starts with consonant sound
-        if (in_array($wordArray[$counter], static::$consonants)) {
+        if ($this->startsWithAVowel($word)) {
+            $suffix .= 'way';
+            $translation .= $word . $suffix;
+        } else {
             while (in_array($wordArray[$counter], static::$consonants)) {
                 $suffix .= $wordArray[$counter];
                 $counter++;
@@ -47,14 +47,35 @@ class PiglatinTranslator
             $suffix .= 'ay';
             $translation .= substr($word, $counter);
             $translation .= $suffix;
-        } else {
-            // or if it starts with vowel(s)
-            $suffix .= 'way';
-            $translation .= $word . $suffix;
         }
 
-        $translation .= $savedPunctuationMark;
+        if ($this->containsPunctuationMark($translation)) {
+            $translation = $this->movePunctuationMarkToEndOfWord($translation);
+        }
 
         return $translation;
+    }
+
+    private function movePunctuationMarkToEndOfWord($translation)
+    {
+        $translation = str_replace('.', '', $translation);
+        $translation .= "."; 
+        return $translation;
+    }
+
+    private function containsPunctuationMark($word)
+    {
+        $containsPuntuationMark = false;
+        foreach (str_split($word) as $letter) {
+            if (in_array($letter, static::$punctuationMarks)) {
+                $containsPuntuationMark = true;
+            }
+        }
+        return $containsPuntuationMark;
+    }
+
+    private function startsWithAVowel($word)
+    {
+        return in_array(str_split($word)[0], static::$vowels);
     }
 }
