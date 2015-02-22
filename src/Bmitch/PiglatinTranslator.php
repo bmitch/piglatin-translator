@@ -65,13 +65,13 @@ class PiglatinTranslator
 
     private function containsPunctuationMark($word)
     {
-        $containsPuntuationMark = false;
+        $containsPunctuation = false;
         foreach (str_split($word) as $letter) {
             if (in_array($letter, static::$punctuationMarks)) {
-                $containsPuntuationMark = true;
+                $containsPunctuation = true;
             }
         }
-        return $containsPuntuationMark;
+        return $containsPunctuation;
     }
 
     private function startsWithAVowel($word)
