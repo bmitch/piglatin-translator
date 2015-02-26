@@ -15,7 +15,7 @@ class PiglatinTranslator
     ];
 
     protected static $punctuationMarks = [
-        '.'
+        '.', ','
     ];
 
     public function translate($phrase)
@@ -58,9 +58,21 @@ class PiglatinTranslator
 
     private function movePunctuationMarkToEndOfWord($translation)
     {
-        $translation = str_replace('.', '', $translation);
-        $translation .= ".";
+        $punctuationMark = $this->getPunctuationMark($translation);
+        $translation = str_replace($punctuationMark, '', $translation);
+        $translation .= $punctuationMark;
         return $translation;
+    }
+
+    private function getPunctuationMark($word)
+    {
+        $punctuationMark = '';
+        foreach (str_split($word) as $letter) {
+            if (in_array($letter, static::$punctuationMarks)) {
+                $punctuationMark = $letter;
+            }
+        }
+        return $punctuationMark;
     }
 
     private function containsPunctuationMark($word)

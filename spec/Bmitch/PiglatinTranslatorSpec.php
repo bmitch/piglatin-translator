@@ -61,4 +61,14 @@ class PiglatinTranslatorSpec extends ObjectBehavior
     {
         $this->translate('over the city in an airplane.')->shouldReturn('overway ethay itycay inway anway airplaneway.');
     }
+
+    function it_translates_a_phrase_with_a_period_on_the_end_and_last_word_consonant_sound()
+    {
+        $this->translate('he sits behind his microphone.')->shouldReturn('ehay itssay ehindbay ishay icrophonemay.');
+    }
+
+    function it_handles_a_comma_after_a_word_with_a_vowel_sound()
+    {
+        $this->translate('leo and capricorn, too.')->shouldReturn('eolay andway apricorncay, ootay.');
+    }
 }
