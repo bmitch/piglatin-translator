@@ -67,8 +67,29 @@ class PiglatinTranslatorSpec extends ObjectBehavior
         $this->translate('he sits behind his microphone.')->shouldReturn('ehay itssay ehindbay ishay icrophonemay.');
     }
 
-    function it_handles_a_comma_after_a_word_with_a_vowel_sound()
+    function it_handles_a_comma_after_a_word_with_a_consonant_sound()
     {
         $this->translate('leo and capricorn, too.')->shouldReturn('eolay andway apricorncay, ootay.');
     }
+    
+    function it_handles_a_comma_after_a_word_with_a_vowel_sound()
+    {
+        $this->translate('oh, fantasy world')->shouldReturn('ohway, antasyfay orldway');
+    }
+
+    function it_handles_a_question_mark_after_a_word_with_a_consonant_sound()
+    {
+        $this->translate('oh, fantasy world')->shouldReturn('ohway, antasyfay orldway');
+    }
+
+    function it_handles_a_question_mark_after_a_word_with_a_vowel_sound()
+    {
+        $this->translate('are you experienced?')->shouldReturn('areway youway experiencedway?');
+    }
+
+    function it_handles_a_sentence_with_a_comma_and_a_period()
+    {
+        $this->translate('one, two and three.')->shouldReturn('oneway, otway andway eethray.');
+    }
+
 }

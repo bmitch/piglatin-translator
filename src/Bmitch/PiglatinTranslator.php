@@ -15,7 +15,7 @@ class PiglatinTranslator
     ];
 
     protected static $punctuationMarks = [
-        '.', ','
+        '.', ',', '?'
     ];
 
     public function translate($phrase)
